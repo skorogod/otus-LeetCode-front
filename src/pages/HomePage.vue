@@ -1,32 +1,31 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import Filter from './shared/Filter.vue'
-import { getLevels } from '../api/getLevels.ts'
-import { getTasks } from '../api/getTasks.ts'
-import { getStatuses } from '../api/getStatuses.ts'
-import { getLTags } from '../api/getTags.ts'
+import Filter from '@/shared/Filter.vue'
+import { getLevels } from '../api/getLevels'
+import { getTasks } from '../api/getTasks'
+import { getStatuses } from '../api/getStatuses'
+import { getTags } from '../api/getTags'
+import type { Ref } from 'vue'
 
-const tags = ref([])
-const statuses = ref([])
-const levels = ref([])
-const tasks = ref([])
+const tags = ref<any[]>([])
+const statuses = ref<any[]>([])
+const levels = ref<any[]>([])
+const tasks = ref<any[]>([])
 
-const error = ref(null)
+const error = ref<null | string>(null)
 const loading = ref(false)
 
-const filters: Ref<{
+const filters = ref<{
   status: string | null,
   level: string | null,
   title: string | null,
-  tags: string[]
-}> = ref({
+  tags: string[]}>
+  ({
   status: null,
   level: null,
   title: null,
   tags: []
 })
-
-
 
 async function fetchTags() {
   loading.value = true;
@@ -34,7 +33,8 @@ async function fetchTags() {
   try{
     tags.value = await getTags()
   } catch (err) {
-    error.value = err.toString();
+    if (err instanceof Error)
+      error.value = err.message;
   } finally {
     loading.value = false;
   }
@@ -46,7 +46,8 @@ async function fetchLevels() {
   try{
     levels.value = await getLevels()
   } catch (err) {
-    error.value = err.toString();
+    if (err instanceof Error)
+      error.value = err.message;
   } finally {
     loading.value = false;
   }
@@ -58,7 +59,8 @@ async function fetchStatuses() {
   try{
     statuses.value = await getStatuses()
   } catch (err) {
-    error.value = err.toString();
+    if (err instanceof Error)
+      error.value = err.message;
   } finally {
     loading.value = false;
   }
@@ -70,7 +72,8 @@ async function fetchTasks(query?: string) {
   try{
     tasks.value = await getTasks(query)
   } catch (err) {
-    error.value = err.toString();
+    if (err instanceof Error)
+      error.value = err.message;
   } finally {
     loading.value = false;
   }
@@ -78,31 +81,37 @@ async function fetchTasks(query?: string) {
 
 watch(filters.value, () => {
   let query = '';
-  console.log(Object.Entries(filters.value))
-  Object.Entries(filters.value)
-                      .forEach((key, value) => {
-                        if(value.length) {
-                            let valueStr = '';
-                            if (value instanceof Array) {
-                              valueStr = value.join(',')
+  Object.entries(filters.value)
+                      .forEach(el => {
+                        if(el[1] && el[1].length) {
+                            let valueStr;
+                            if (el[1] instanceof Array) {
+                              valueStr = el[1].join(',')
                             }
                             else {
-                              valueStr = value
+                              valueStr = el[1]
                             }
                             if (query.length) {
-                              query += `&${key}=${valueStr}`
+                              query += `&${el[0]}=${valueStr}`
                             }
                             else{
-                              query += `${key}=${valueStr}`
+                              query += `${el[0]}=${valueStr}`
                             }
                         }
                       });
   fetchTasks(query)
 })
+
+onMounted(() => {
+  fetchLevels();
+  fetchStatuses();
+  fetchTags();
+})
   
 </script>
 
 <template>
+  <div>
     <Filter>
       <select class="select select-bordered max-w-xs">
         <option disabled selected>Сложость</option>
@@ -160,6 +169,7 @@ watch(filters.value, () => {
           </tbody>
         </table>
       </div>
+  </div>
       
 </template>
 
