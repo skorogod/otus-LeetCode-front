@@ -10,7 +10,7 @@
                 labels: string[],
                 datasets: [
                     {   
-                        label: string,
+                        label?: string,
                         data: number[],
                         backgroudColor: string[],
                         hoverOffset: number
@@ -24,7 +24,7 @@
 
 <template>
     <Doughnut
-        id="props.id",
+        :id="props.id",
         :options="props.chartOptions"
         :data="props.chartData"
     >

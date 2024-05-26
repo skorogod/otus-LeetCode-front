@@ -11,16 +11,16 @@
 
 <template>
     <div class="flex flex-col gap-3">
-        <div class="flex flex-row">
-            <div>
-                <img src="props.avatarSrc" alt="">
+        <div class="flex flex-row gap-3">
+            <div class="avatar placeholder">
+                <div class="bg-neutral text-neutral-content rounded-full w-16">
+                  <span class="text-xs">{{Array.from(props.username)[0].toUpperCase()}}</span>
+                </div>
             </div>
-            <div class="flex flex-col justify-between">
+            <div class="flex flex-col justify-center items-center">
                 <p>{{ props.username }}</p>
-                <p>{{ props.rating }}</p>
             </div>
         </div>
-        <button class="btn btn-accent w-full">Accent</button>
     </div>
 </template>
 

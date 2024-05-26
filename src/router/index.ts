@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/pages/HomePage.vue'
+import { useUserStore } from '@/shared/store/userStore'
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -32,15 +33,29 @@ export const router = createRouter({
       path: '/home',
       name: 'home',
       component: () => import('../pages/HomePage.vue')
+    },
+    {
+      path: '/users/:id',
+      component: () => import('../pages/users/UserPage.vue'),
+      name: 'user',
+     
+    },
+    {
+      // See: https://router.vuejs.org/guide/migration/#removed-star-or-catch-all-routes
+      path: '/:pathMatch(.*)*',
+      name: '404',
+      component: () => '404', // import('@/pages/404/Main.vue')
     }
   ]
 })
 
 router.beforeEach(async (to, from, next) => {
   if (to.meta.isAuth) {
-    await router.push({
-      name: 'login'
-    })
+    if (true) {
+      await router.push({
+        name: 'login'
+      })
+    }
   }
   next()
 })

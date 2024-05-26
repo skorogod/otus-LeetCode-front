@@ -9,7 +9,7 @@ interface LoginResponse {
 }
 
 export const login = async ({ username, password}: LoginPayload): Promise<LoginResponse> => {
-  const response = await fetch(`localhost:80/auth/login`, {
+  const response = await fetch(`localhost:3000/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

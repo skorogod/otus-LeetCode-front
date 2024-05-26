@@ -23,6 +23,7 @@ const register = async () => {
         const { token, ...user } = data;
         userStore.user = user;
         userStore.token = token;
+        localStorage.setItem('userToken', token)
         await router.push({
             name: 'home'
         })

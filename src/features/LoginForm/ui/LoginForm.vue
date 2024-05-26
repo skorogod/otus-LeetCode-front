@@ -23,6 +23,7 @@ const login = async () => {
     const { token, ...user } = data
     userStore.user = user
     userStore.token = token
+    localStorage.setItem('userToken', token)
     await router.push({
       name: 'users',
     })
@@ -53,7 +54,6 @@ const isFormDisabled = computed(() => {
               <IconPassword  class="w-4 h-4 opacity-70" />
             </template>
           </AppField>
-
           <button :disabled="isFormDisabled" class="btn btn-primary">Отправить</button>
           <p class="mx-auto mt-5"><RouterLink class="underline text-sky-700" to="/register">регистрация</RouterLink></p>
         </form>
