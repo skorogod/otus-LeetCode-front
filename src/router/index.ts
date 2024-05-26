@@ -38,7 +38,11 @@ export const router = createRouter({
       path: '/users/:id',
       component: () => import('../pages/users/UserPage.vue'),
       name: 'user',
-     
+    },
+    {
+      path: '/tasks/:id',
+      name: 'task',
+      component: () => import('../pages/tasks/TaskPage.vue')
     },
     {
       // See: https://router.vuejs.org/guide/migration/#removed-star-or-catch-all-routes

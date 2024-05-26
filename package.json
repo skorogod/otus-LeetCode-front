@@ -17,11 +17,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.2",
     "chart.js": "^4.4.2",
     "dotenv": "^16.4.5",
     "pinia": "^2.1.7",
+    "simple-code-editor": "^2.0.9",
     "vue": "^3.4.21",
     "vue-chartjs": "^5.3.1",
+    "vue-codemirror": "^6.1.1",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {

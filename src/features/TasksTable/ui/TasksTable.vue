@@ -28,9 +28,9 @@ const tasksStore = useTasksStore();
 const userStore = useUserStore()
 const abortController = new AbortController()
 
-const fetchTasks = async(filters: TaskFilters, signal: AbortSignal) => {
+const fetchTasks = async(filters?: TaskFilters, signal?: AbortSignal) => {
     try {
-        const data = await TaskService.getTasks({...filters, signal, token: userStore.token})
+        const data = await TaskService.getTasks({filters, signal, token: userStore.token})
         tasks.value = data
     }
     catch (err) {
@@ -42,6 +42,7 @@ onMounted(() => {
     tasksStore.fetchStatuses()
     tasksStore.fetchLevels()
     tasksStore.fetchTaskTypes()
+    fetchTasks()
 })
 
 onBeforeUnmount(() => {
