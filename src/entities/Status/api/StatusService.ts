@@ -2,7 +2,7 @@ import type { Status } from '@/shared/types/Status'
 import type { GetProps } from '@/shared/types/ApiProps'
 
 export async function getStatuses(props: GetProps): Promise<Status[]> {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/statuses`, {
+  const response = await fetch(`${process.env.API_HOST}:${process.env.API_PORT}/statuses`, {
     headers: {
       Authorization: props.token ? `Bearer ${props.token}` : ''
     }

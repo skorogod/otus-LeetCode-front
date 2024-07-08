@@ -18,10 +18,12 @@
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
+    "@rollup/plugin-replace": "^5.0.7",
     "chart.js": "^4.4.2",
     "dotenv": "^16.4.5",
     "pinia": "^2.1.7",
     "simple-code-editor": "^2.0.9",
+    "vite-plugin-env-compatible": "^2.0.1",
     "vue": "^3.4.21",
     "vue-chartjs": "^5.3.1",
     "vue-codemirror": "^6.1.1",

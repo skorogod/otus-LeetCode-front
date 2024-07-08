@@ -1,3 +1,5 @@
+import * as config from 'dotenv'
+
 interface RegisterPayload {
   username: string
   email: string
@@ -15,7 +17,7 @@ export const register = async ({
   email,
   password
 }: RegisterPayload): Promise<RegisterResponse> => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+  const response = await fetch(`${process.env.API_HOST}:${process.env.API_PORT}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

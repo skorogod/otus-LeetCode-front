@@ -2,7 +2,7 @@ import type { Level } from '@/shared/types/Level'
 import type { GetProps } from '@/shared/types/ApiProps'
 
 export async function getLevels(props: GetProps): Promise<Level[]> {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/levels`, {
+  const response = await fetch(`${process.env.API_HOST}:${process.env.API_PORT}/levels`, {
     headers: {
       Authorization: props.token ? `Bearer ${props.token}` : ''
     }

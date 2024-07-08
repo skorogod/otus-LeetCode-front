@@ -12,7 +12,7 @@ interface addCommentProps extends GetProps {
 }
 
 export async function getComments(props: GetCommentProps): Promise<Comment[]> {
-  let BASE_URL = `${import.meta.env.VITE_API_URL}/comments`
+  let BASE_URL = `${process.env.API_HOST}:${process.env.API_PORT}/comments`
   if (props.taskId) {
     BASE_URL += `?task-id=${props.taskId}`
   }

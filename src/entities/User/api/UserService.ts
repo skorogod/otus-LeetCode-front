@@ -12,7 +12,7 @@ export const getUser = async (
   token: string,
   abortSignal: AbortSignal
 ): Promise<User> => {
-  const response = await fetch(`${import.meta}/users/${id}`, {
+  const response = await fetch(`${process.env.API_HOST}:${process.env.API_PORT}/users/${id}`, {
     signal: abortSignal,
     headers: {
       Authorization: `Bearer ${token}`
@@ -26,7 +26,7 @@ export const getUser = async (
 }
 
 export const getProfile = async (token: string): Promise<User> => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/profile`, {
+  const response = await fetch(`${process.env.API_HOST}:${process.env.API_PORT}/auth/profile`, {
     headers: {
       Authorization: `Bearer ${token}`
     }

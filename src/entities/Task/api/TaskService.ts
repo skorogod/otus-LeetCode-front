@@ -15,7 +15,7 @@ interface GetTaskProps extends GetProps {
 }
 
 export async function getTasks(props: GetTasksProps): Promise<Task[]> {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`, {
+  const response = await fetch(`${process.env.API_HOST}:${process.env.API_PORT}/tasks`, {
     headers: {
       Authorization: props.token ? `Bearer ${props.token}` : ''
     }
@@ -29,12 +29,15 @@ export async function getTasks(props: GetTasksProps): Promise<Task[]> {
 }
 
 export async function getTask(props: GetTaskProps): Promise<Task> {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks/${props.taskId}`, {
-    headers: {
-      Authorization: props.token ? `Bearer ${props.token}` : ''
-    },
-    signal: props.signal
-  })
+  const response = await fetch(
+    `${process.env.API_HOST}:${process.env.API_PORT}/tasks/${props.taskId}`,
+    {
+      headers: {
+        Authorization: props.token ? `Bearer ${props.token}` : ''
+      },
+      signal: props.signal
+    }
+  )
 
   if (!response.ok) {
     throw new Error(response.statusText)

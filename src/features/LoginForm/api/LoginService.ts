@@ -1,3 +1,5 @@
+import * as config from 'dotenv'
+
 interface LoginPayload {
   username: string
   password: string
@@ -13,7 +15,7 @@ interface LoginResponse {
 }
 
 export const login = async ({ username, password }: LoginPayload): Promise<LoginResponse> => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+  const response = await fetch(`${process.env.API_HOST}:${process.env.API_PORT}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
