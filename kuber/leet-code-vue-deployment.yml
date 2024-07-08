@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leet-code-vue-deployment
+  labels:
+    app: leet-code-vue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: leet-code-vue
+  template:
+    metadata:
+      labels:
+        app: leet-code-vue
+    spec:
+      containers:
+      - name: leetcode-vue-container
+        image: markus777/leet-code-vue:0.0.1
+        ports:
+          - containerPort: 5000
+        env:
+          - name: API_HOST
+            value: $(LEET_CODE_BACKEND_SERVICE_PORT_3000_TCP_ADDR)
+          - name: API_PORT
+            value: $(LEET_CODE_BACKEND_SERVICE_PORT_3000_TCP_PORT)

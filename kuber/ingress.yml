@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: leet-code-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "yc-clusterissuer"
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+      - leetcode.skorogod.ru
+      secretName: leetcode-ingress-cert
+  rules:
+    - host: leetcode.skorogod.ru
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: leet-code-vue-service
+              port:
+                number: 5000
