@@ -73,8 +73,8 @@ onBeforeUnmount(() => {
     </ul>
     <div class="flex flex-row gap-2">
         <input v-model="commentText" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-        <button
-            :onclick="(e:Event) => sendComment(props.taskId, user.id, commentText)"
+        <button v-if="user && user.id"
+            :onclick="(e:Event) => sendComment(props.taskId, user?.id as number, commentText)"
             class="btn btn-active"
         >Отправить</button>
     </div>

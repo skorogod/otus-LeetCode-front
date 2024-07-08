@@ -1,28 +1,33 @@
-
-
-interface RegisterPayload { username: string, email: string, password: string }
-
+interface RegisterPayload {
+  username: string
+  email: string
+  password: string
+}
 interface RegisterResponse {
-    id: number,
-    username: string,
-    image: string,
-    token: string
+  id: number
+  username: string
+  image: string
+  token: string
 }
 
-export const register = async({username, email, password}: RegisterPayload): Promise<RegisterResponse> => {
-    const response = await fetch('http://localhost:3000/users', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username,
-            email,
-            password,
-        })
+export const register = async ({
+  username,
+  email,
+  password
+}: RegisterPayload): Promise<RegisterResponse> => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username,
+      email,
+      password
     })
-    if (!response.ok) {
-        throw new Error(response.statusText)
-    }
-    return await response.json()
-} 
+  })
+  if (!response.ok) {
+    throw new Error(response.statusText)
+  }
+  return await response.json()
+}

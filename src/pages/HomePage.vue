@@ -1,14 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
-import Filter from '@/shared/Filter.vue'
-import { getLevels } from '../api/getLevels'
-import { getTasks } from '../api/getTasks'
-import { getStatuses } from '../api/getStatuses'
-import { getTags } from '../api/getTags'
-import type { Ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import TasksTable from '@/features/TasksTable/ui/TasksTable.vue'
-import { useTasksStore } from '@/shared/store/tasksStore'
 const error = ref<null | string>(null)
 const loading = ref(false)
 

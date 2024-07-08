@@ -1,48 +1,44 @@
-import type { Task } from "@/shared/types/Task"
-import type { GetProps } from "@/shared/types/ApiProps"
+import type { Task } from '@/shared/types/Task'
+import type { GetProps } from '@/shared/types/ApiProps'
 
 interface GetTasksProps extends GetProps {
-    filters?: {
-        statusId: number,
-        levelId: number,
-        typeId: number,
-        title: string
-    }
+  filters?: {
+    statusId: number
+    levelId: number
+    typeId: number
+    title: string
+  }
 }
 
 interface GetTaskProps extends GetProps {
-    taskId: number
+  taskId: number
 }
 
 export async function getTasks(props: GetTasksProps): Promise<Task[]> {
-    const response = await fetch(
-        'http://localhost:3000/tasks', {
-            headers: {
-                'Authorization': props.token ? `Bearer ${props.token}` :  ''
-            }
-        }
-    )
-
-    if (!response.ok) {
-        throw new Error (response.statusText)
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`, {
+    headers: {
+      Authorization: props.token ? `Bearer ${props.token}` : ''
     }
+  })
 
-    return await response.json()
+  if (!response.ok) {
+    throw new Error(response.statusText)
+  }
+
+  return await response.json()
 }
 
 export async function getTask(props: GetTaskProps): Promise<Task> {
-    const response = await fetch(
-        `http://localhost:3000/tasks/${props.taskId}`, {
-            headers: {
-                'Authorization': props.token ? `Bearer ${props.token}` :  ''
-            },
-            signal: props.signal
-        }
-    )
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks/${props.taskId}`, {
+    headers: {
+      Authorization: props.token ? `Bearer ${props.token}` : ''
+    },
+    signal: props.signal
+  })
 
-    if (!response.ok) {
-        throw new Error (response.statusText)
-    }
+  if (!response.ok) {
+    throw new Error(response.statusText)
+  }
 
-    return await response.json()
+  return await response.json()
 }
