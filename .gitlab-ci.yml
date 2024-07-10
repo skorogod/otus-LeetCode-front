@@ -1,0 +1,9 @@
+stages:
+  - deploy
+helm:
+  stage: deploy
+  environment: development
+  variables:
+    KUBECONFIG: "${KUBECONFIG_DEV}"
+  script:
+    - helm install leet-code-vue  http://158.160.173.129/otus-study/leetcode-vue/-/tree/main/helm/leet-code-vue-helm
