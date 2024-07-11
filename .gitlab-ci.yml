@@ -1,9 +1,24 @@
 stages:
+  - lint
   - deploy
+
+job:
+  stage: lint
+  tags:
+    - deploy
+  script:
+    - helm lint ./.helm/leet-code-vue
+
 helm:
   stage: deploy
-  environment: development
-  variables:
-    KUBECONFIG: "${KUBECONFIG_DEV}"
+  tags:
+    - deploy
+  before_script:
+    - mkdir -p  $HOME/.config/yandex-cloud
+    - curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -a
+    - source "/home/gitlab-runner/.bashrc"
+    - mkdir -p $HOME/.kube
+    - cat $KUBE_CONFIG > $HOME/.kube/config
+    - cat $YC_CONFIG > $HOME/.config/yandex-cloud/config.yaml
   script:
-    - helm install leet-code-vue  http://158.160.173.129/otus-study/leetcode-vue/-/tree/main/helm/leet-code-vue-helm
+    - helm install leet-code-vue  ./.helm/leet-code-vue
