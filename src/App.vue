@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import MainPage from "./components/MainPage.vue"
+import Header from './shared/Header.vue'
+
 </script>
 
 <template>
-  <MainPage/>
+  <Header/>
+  <RouterView></RouterView>
 </template>
 
