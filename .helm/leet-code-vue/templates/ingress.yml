@@ -10,9 +10,9 @@ metadata:
 spec:
   ingressClassName: "nginx"
   tls:
-    - hosts:
+  - hosts:
       - leetcode.skorogod.ru
-      secretName: leetcode-ingress-cert
+    secretName: leetcode-ingress-cert
   rules:
       - host: leetcode.skorogod.ru
         http:
