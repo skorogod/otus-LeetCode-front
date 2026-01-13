@@ -21,4 +21,4 @@ helm:
     - cat $KUBE_CONFIG > $HOME/.kube/config
     - cat $YC_CONFIG > $HOME/.config/yandex-cloud/config.yaml
   script:
-    - helm install leet-code-vue  ./.helm/leet-code-vue
+    - helm upgrade --install leet-code-vue  ./.helm/leet-code-vue

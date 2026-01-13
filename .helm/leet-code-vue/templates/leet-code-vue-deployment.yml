@@ -4,6 +4,9 @@ metadata:
   name: leet-code-vue-deployment
   labels:
     app: leet-code-vue
+  annotations:
+    meta.helm.sh/release-name: 'leet-code-vue'
+    meta.helm.sh/release-namespace: 'default'
 spec:
   replicas: 1
   selector:
